@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Family Organizer Application.</Text>
+      <Text>Family Organizer</Text>
       <StatusBar style="auto" />
     </View>
   );
