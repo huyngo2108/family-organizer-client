@@ -24,6 +24,7 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-FOA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FOA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = FOA/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FOA/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B554E3742E39D02700FA8944 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -42,6 +43,7 @@
 		13B07FAE1A68108700A75B9A /* FOA */ = {
 			isa = PBXGroup;
 			children = (
+				B554E3752E39D02700FA8944 /* Fonts */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -87,6 +89,14 @@
 				13B07F961A680F5B00A75B9A /* FOA.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B554E3752E39D02700FA8944 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B554E3742E39D02700FA8944 /* MaterialCommunityIcons.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
