@@ -4,7 +4,7 @@ import spacing from './spacing';
 
 export const theme = {
   ...MD3LightTheme,
-  roundness: 8, // từ token radius.radious_button
+  roundness: 8,
   spacing,
   colors: {
     ...MD3LightTheme.colors,

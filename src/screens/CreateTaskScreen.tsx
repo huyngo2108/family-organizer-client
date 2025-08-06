@@ -7,8 +7,9 @@ import {
   Platform,
   Text,
   TouchableOpacity,
+  Image,
 } from 'react-native';
-import { useTheme, TextInput, Button, Appbar, Avatar, Divider } from 'react-native-paper';
+import { useTheme, TextInput, Button, Divider } from 'react-native-paper';
 
 interface Task {
   name: string;
@@ -50,12 +51,20 @@ export default function CreateTaskScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <ScrollView contentContainerStyle={styles.container}>
-        <Appbar.Header style={styles.header}>
-          <Appbar.BackAction onPress={() => {}} />
-          <Appbar.Content title="Household Task" titleStyle={styles.headerTitle} />
-          <Avatar.Image size={36} source={require('../../assets/images/logo.png')} />
-        </Appbar.Header>
 
+        {/* Custom Header with exact top padding (matches Home) */}
+        <View style={[styles.headerCustom, { backgroundColor: colors.background }]}> 
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.backText}>{'<'} </Text>
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Household Task</Text>
+          <Image
+            source={require('../../assets/images/logo.png')}
+            style={styles.logo}
+          />
+        </View>
+
+        {/* Task Form */}
         <View style={styles.formContainer}>
           <View style={styles.formRow}>
             <Text style={styles.formLabel}>Create Task</Text>
@@ -98,6 +107,7 @@ export default function CreateTaskScreen() {
           </TouchableOpacity>
         </View>
 
+        {/* Create Task Button */}
         <Button
           mode="contained"
           onPress={handleCreateTask}
@@ -107,8 +117,9 @@ export default function CreateTaskScreen() {
           Create Task
         </Button>
 
+        {/* Recently Created Tasks */}
         {taskList.length > 0 && (
-          <View style={{ marginTop: 32 }}>
+          <View style={styles.recentTasksContainer}>
             <Text style={styles.sectionTitle}>Recently Created:</Text>
             {taskList.map((task, index) => (
               <View key={index} style={styles.taskItem}>
@@ -120,6 +131,7 @@ export default function CreateTaskScreen() {
             ))}
           </View>
         )}
+
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -131,15 +143,25 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
     flexGrow: 1,
   },
-  header: {
-    backgroundColor: 'transparent',
-    elevation: 0,
+  headerCustom: {
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 45, 
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+  },
+  backText: {
+    fontSize: 22,
   },
   headerTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    alignSelf: 'center',
+  },
+  logo: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
   },
   formContainer: {
     borderWidth: 1,
@@ -153,7 +175,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 12,
-    height: 52, 
+    height: 52,
     borderBottomWidth: 1,
     borderColor: '#eee',
   },
@@ -175,7 +197,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     fontSize: 14,
     paddingVertical: 0,
-    height: 52, 
+    height: 52,
   },
   saveButton: {
     marginTop: 24,
@@ -187,6 +209,9 @@ const styles = StyleSheet.create({
   saveButtonLabel: {
     color: 'black',
     fontWeight: '600',
+  },
+  recentTasksContainer: {
+    marginTop: 32,
   },
   sectionTitle: {
     fontSize: 16,
