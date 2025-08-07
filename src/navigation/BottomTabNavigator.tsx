@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import HomeScreen from '../screens/HomeScreen';
 import CreateTaskScreen from '../screens/CreateTaskScreen';
 import SearchScreen from '../screens/SearchScreen';
-import RankingScreen from '../screens/RankingScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
@@ -56,7 +56,7 @@ export default function BottomTabNavigator() {
       />
       <Tab.Screen
         name="Notification"
-        component={RankingScreen}
+        component={NotificationScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="bell-outline" color={color} size={size} />
