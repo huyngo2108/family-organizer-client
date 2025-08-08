@@ -8,8 +8,11 @@ import CreateTaskScreen from '../screens/CreateTaskScreen';
 import SearchScreen from '../screens/SearchScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import RankingScreen from '../screens/RankingScreen'; 
 
-const Tab = createBottomTabNavigator();
+import type { BottomTabParamList } from '../types';
+
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const { colors } = useTheme();
@@ -72,6 +75,7 @@ export default function BottomTabNavigator() {
           ),
         }}
       />
+
     </Tab.Navigator>
   );
 }

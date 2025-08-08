@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import type { CompositeNavigationProp } from '@react-navigation/native';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import type { BottomTabParamList } from '../types';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { BottomTabParamList, RootStackParamList } from '../types';
 
 import SearchBar from '../components/SearchBar';  
 import BannerCarousel from '../components/BannerCarousel';
@@ -34,7 +36,12 @@ const tasks = [
 
 export default function HomeScreen() {
   const { colors } = useTheme();
-  const navigation = useNavigation<BottomTabNavigationProp<BottomTabParamList>>();
+  const navigation = useNavigation<
+    CompositeNavigationProp<
+      BottomTabNavigationProp<BottomTabParamList>,
+      NativeStackNavigationProp<RootStackParamList>
+    >
+  >();
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -93,9 +100,7 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: { flex: 1 },
   section: {
     paddingVertical: spacing.md,
     paddingHorizontal: spacing.md,

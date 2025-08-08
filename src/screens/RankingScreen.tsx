@@ -52,7 +52,7 @@ export default function RankingScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Header title="Ranking Last Weak" />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 80 }}>
         {rankingGroups.map((group) => (
           <View key={group.id} style={styles.groupContainer}>
             <View style={styles.dateRow}>
@@ -61,9 +61,16 @@ export default function RankingScreen() {
             </View>
             <View style={styles.rowWrapper}>
               {group.data.map((item) => (
-                <View key={item.rank} style={[styles.rankBox, { backgroundColor: item.color }]}>
-                  <Text style={styles.rankNumber}>{item.rank}</Text>
-                  <Avatar.Image source={item.avatar} size={40} style={styles.avatar} />
+                <View
+                  key={item.rank}
+                  style={[styles.rankBox, { backgroundColor: item.color }]}
+                >
+                  <Text style={styles.rankNumber}>#{item.rank}</Text>
+                  <Avatar.Image
+                    source={item.avatar}
+                    size={50}
+                    style={styles.avatar}
+                  />
                   <Text>{item.name}</Text>
                 </View>
               ))}
@@ -71,25 +78,27 @@ export default function RankingScreen() {
           </View>
         ))}
 
-        <View style={styles.footerContainer}>
+        <View style={styles.footerRow}>
           <Image
             source={require('../../assets/images/top_of_month.png')}
             style={styles.banner}
             resizeMode="contain"
           />
-          {users.map((user) => (
-            <View key={user.email} style={styles.userRow}>
-              <Avatar.Image
-                source={user.avatar}
-                size={36}
-                style={{ backgroundColor: user.bgColor }}
-              />
-              <View style={styles.userInfo}>
-                <Text>{user.name}</Text>
-                <Text style={styles.email}>{user.email}</Text>
+          <View style={styles.userList}>
+            {users.map((user) => (
+              <View key={user.email} style={styles.userRow}>
+                <Avatar.Image
+                  source={user.avatar}
+                  size={36}
+                  style={[styles.userAvatar, { backgroundColor: user.bgColor }]}
+                />
+                <View style={styles.userInfo}>
+                  <Text>{user.name}</Text>
+                  <Text style={styles.email}>{user.email}</Text>
+                </View>
               </View>
-            </View>
-          ))}
+            ))}
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -118,34 +127,52 @@ const styles = StyleSheet.create({
   },
   rankBox: {
     flex: 1,
+    aspectRatio: 1, 
     alignItems: 'center',
-    paddingVertical: spacing.sm,
+    justifyContent: 'center',
     borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'black', 
+    padding: spacing.sm,
   },
   rankNumber: {
+    position: 'absolute',
+    top: 4,
+    left: 6,
     fontWeight: 'bold',
-    fontSize: 16,
-    marginBottom: 4,
+    fontSize: 14,
   },
-  avatar: { marginBottom: 4, backgroundColor: 'transparent' },
-  footerContainer: {
+  avatar: {
+    marginBottom: 4,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: 'black', 
+  },
+  footerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: spacing.md,
-    paddingBottom: spacing.lg,
+    marginTop: spacing.md,
+    gap: 12,
   },
   banner: {
-    width: '100%',
-    height: 160,
+    width: 140,
+    height: 160, 
     borderRadius: 12,
-    marginBottom: spacing.md,
+  },
+  userList: {
+    flex: 1,
+    justifyContent: 'center',
   },
   userRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: spacing.sm,
   },
-  userInfo: {
-    marginLeft: spacing.sm,
+  userAvatar: {
+    marginRight: spacing.sm,
   },
+  userInfo: {},
   email: {
     color: '#888',
     fontSize: 12,
