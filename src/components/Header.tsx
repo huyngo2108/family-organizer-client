@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 interface HeaderProps {
   title: string;
+  onBellPress?: () => void; 
 }
 
-export default function Header({ title }: HeaderProps) {
+export default function Header({ title, onBellPress }: HeaderProps) {
   const { colors } = useTheme();
 
   return (
@@ -17,11 +18,14 @@ export default function Header({ title }: HeaderProps) {
         resizeMode="contain"
       />
       <Text style={styles.title}>{title}</Text>
-      <Image
-        source={require('../../assets/images/bell.png')}
-        style={styles.bell}
-        resizeMode="contain"
-      />
+      
+      <TouchableOpacity onPress={onBellPress}>
+        <Image
+          source={require('../../assets/images/bell.png')}
+          style={styles.bell}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -39,7 +43,6 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 20,
-
   },
   title: {
     fontSize: 20,
