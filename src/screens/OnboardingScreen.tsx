@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
+
+import { useOnboardingScreenStyles } from '../styles/screens/OnboardingScreen.styles';
 
 export default function OnboardingScreen({ navigation }: { navigation: any }) {
   const { colors } = useTheme();
+  const styles = useOnboardingScreenStyles();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,21 +21,3 @@ export default function OnboardingScreen({ navigation }: { navigation: any }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 24,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: '900',
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    textShadowColor: '#00000055',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 3,
-  },
-});

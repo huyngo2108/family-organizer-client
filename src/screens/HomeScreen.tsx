@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  StyleSheet,
   ScrollView,
   Text,
   FlatList,
@@ -14,12 +13,14 @@ import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { BottomTabParamList, RootStackParamList } from '../types';
 
-import SearchBar from '../components/SearchBar';  
+import SearchBar from '../components/SearchBar';
 import BannerCarousel from '../components/BannerCarousel';
 import spacing from '../theme/spacing';
 import Header from '../components/Header';
 import Avatar from '../components/Avatar';
 import TaskCard from '../components/TaskCard';
+
+import { useHomeScreenStyles } from '../styles/screens/HomeScreen.styles';
 
 const members = [
   { id: '1', label: 'Andrew', uri: require('../../assets/images/andrew.png') },
@@ -36,6 +37,8 @@ const tasks = [
 
 export default function HomeScreen() {
   const { colors } = useTheme();
+  const styles = useHomeScreenStyles();
+
   const navigation = useNavigation<
     CompositeNavigationProp<
       BottomTabNavigationProp<BottomTabParamList>,
@@ -98,31 +101,3 @@ export default function HomeScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  section: {
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.md,
-  },
-  sectionHeader: {
-    paddingHorizontal: spacing.md,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: spacing.sm,
-  },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  link: {
-    fontSize: 14,
-    color: '#007AFF',
-    marginLeft: 24,
-  },
-});

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import {
   View,
-  StyleSheet,
   Text,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import { useTheme, Avatar, Badge } from 'react-native-paper';
+
+import { useNotificationScreenStyles } from '../styles/screens/NotificationScreen.styles';
 
 const notifications = [
   {
@@ -63,13 +64,14 @@ const notifications = [
 
 export default function NotificationScreen() {
   const { colors } = useTheme();
+  const styles = useNotificationScreenStyles();
   const [activeTab, setActiveTab] = useState('Recent');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-    <View style={styles.customHeader}>
+      <View style={styles.customHeader}>
         <Text style={styles.headerTitle}>Notifications</Text>
-    </View>
+      </View>
 
       <View style={styles.filterTabs}>
         {['Recent', 'New Messenger', 'New Follower'].map((tab) => (
@@ -78,7 +80,9 @@ export default function NotificationScreen() {
             style={[styles.tabButton, activeTab === tab && styles.activeTab]}
             onPress={() => setActiveTab(tab)}
           >
-            <Text style={[styles.tabText, activeTab === tab && styles.activeTabText]}>{tab}</Text>
+            <Text style={[styles.tabText, activeTab === tab && styles.activeTabText]}>
+              {tab}
+            </Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -93,8 +97,12 @@ export default function NotificationScreen() {
                 {isUnread && <Badge style={styles.dot} size={7} />}
               </View>
               <View style={styles.textWrapper}>
-                <Text style={[styles.nameText, isUnread && styles.nameTextUnread]}>{item.name}</Text>
-                <Text style={[styles.messageText, isUnread && styles.messageTextUnread]}>{item.message}</Text>
+                <Text style={[styles.nameText, isUnread && styles.nameTextUnread]}>
+                  {item.name}
+                </Text>
+                <Text style={[styles.messageText, isUnread && styles.messageTextUnread]}>
+                  {item.message}
+                </Text>
                 <Text style={styles.timeText}>{item.time}</Text>
               </View>
               {item.type === 'button' && (
@@ -110,112 +118,3 @@ export default function NotificationScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  customHeader: {
-  paddingTop: 60, 
-  paddingBottom: 16,
-  paddingHorizontal: 20,
-  flexDirection: 'row',
-  alignItems: 'center',
-},
-
-  headerTitle: {
-    fontSize: 20, 
-    fontWeight: 'bold',
-    alignSelf: 'center',
-  },
-  filterTabs: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 5,
-  },
-  tabButton: {
-    paddingHorizontal: 18,
-    paddingVertical: 8,
-    borderRadius: 20,
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#ddd',
-  },
-  activeTab: {
-    backgroundColor: '#000',
-    borderColor: '#000',
-  },
-  tabText: {
-    fontSize: 14,
-    color: '#000',
-    fontWeight: '400',
-  },
-  activeTabText: {
-    color: '#fff',
-    fontWeight: '500',
-  },
-  notificationList: {
-    paddingLeft: 20,
-    paddingRight:20,
-  },
-  notificationItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 14,
-    minHeight: 74, 
-    borderBottomWidth: 0.5,
-    borderColor: '#ddd',
-  },
-  avatarWrapper: {
-    position: 'relative',
-    marginRight: 10,
-  },
-  dot: {
-    position: 'absolute',
-    top: 19,
-    left: -13, 
-    backgroundColor: 'red',
-  },
-  textWrapper: {
-    flex: 1,
-    marginLeft: 8,
-  },
-  nameText: {
-    fontSize: 15,
-    fontWeight: '500',
-  },
-  nameTextUnread: {
-    fontWeight: '600',
-  },
-  messageText: {
-    fontSize: 14,
-    fontWeight: '300',
-  },
-  messageTextUnread: {
-    fontWeight: '400',
-  },
-  timeText: {
-    fontSize: 13,
-    color: '#999',
-    marginTop: 4,
-  },
-  acceptButton: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    backgroundColor: '#000',
-    borderRadius: 6,
-  },
-  acceptText: {
-    color: 'white',
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  noMoreText: {
-  textAlign: 'center',
-  color: '#B0B0B0',
-  fontSize: 13,
-  marginTop: 16,
-  marginBottom: 12,
-},
-
-});
