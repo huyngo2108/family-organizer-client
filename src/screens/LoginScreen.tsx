@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, Alert } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackNavigation } from '../navigation/types'; 
+import { RootStackNavigation } from '../types'; 
 import InputField from '../components/InputField';
 import PrimaryButton from '../components/PrimaryButton';
 import spacing from '../theme/spacing';
