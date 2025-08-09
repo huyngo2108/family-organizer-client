@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   View,
   FlatList,
-  StyleSheet,
   TextInput as RNInput,
   KeyboardAvoidingView,
   Platform,
@@ -14,8 +13,11 @@ import { useTheme } from 'react-native-paper';
 import Header from '../components/Header';
 import spacing from '../theme/spacing';
 
+import { useChatScreenStyles } from '../styles/screens/ChatScreen.styles';
+
 export default function ChatScreen() {
   const { colors } = useTheme();
+  const styles = useChatScreenStyles();
   const [messages, setMessages] = useState([
     { id: '1', text: 'Hello!', sent: false },
     { id: '2', text: 'Hi there!', sent: true },
@@ -51,9 +53,7 @@ export default function ChatScreen() {
               },
             ]}
           >
-            <Text
-              style={{ color: item.sent ? '#fff' : colors.onSurface }}
-            >
+            <Text style={{ color: item.sent ? '#fff' : colors.onSurface }}>
               {item.text}
             </Text>
           </View>
@@ -61,9 +61,7 @@ export default function ChatScreen() {
         contentContainerStyle={styles.chatList}
       />
 
-      <View
-        style={[styles.inputRow, { borderTopColor: colors.onSurfaceDisabled }]}
-      >
+      <View style={[styles.inputRow, { borderTopColor: colors.onSurfaceDisabled }]}>
         <RNInput
           style={[styles.textInput, { color: colors.onSurface }]}
           placeholder="Type a message..."
@@ -78,28 +76,3 @@ export default function ChatScreen() {
     </KeyboardAvoidingView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  chatList: { padding: spacing.md },
-  bubble: {
-    maxWidth: '75%',
-    padding: spacing.sm,
-    borderRadius: 12,
-    marginVertical: spacing.xs,
-  },
-  inputRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderTopWidth: 1,
-    padding: spacing.sm,
-  },
-  textInput: {
-    flex: 1,
-    height: 40,
-    paddingHorizontal: spacing.sm,
-  },
-  sendButton: {
-    paddingHorizontal: spacing.sm,
-  },
-});
