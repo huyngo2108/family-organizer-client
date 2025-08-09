@@ -8,6 +8,7 @@ import InputField from '../components/InputField';
 import PrimaryButton from '../components/PrimaryButton';
 
 import { useLoginScreenStyles } from '../styles/screens/LoginScreen.styles';
+import api from '../services/api'; 
 
 export default function LoginScreen() {
   const { colors } = useTheme();
@@ -16,20 +17,65 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      Alert.alert('Missing Info', 'Please enter both email and password.');
-      return;
-    }
-    const correctEmail = 'test';
-    const correctPassword = '1';
+  const handleLogin = async () => {
+  if (!email || !password) {
+    Alert.alert('Missing Info', 'Please enter both email and password.');
+    return;
+  }
 
-    if (email === correctEmail && password === correctPassword) {
-      navigation.replace('MainApp');
-    } else {
-      Alert.alert('Login Failed', 'Invalid email or password.');
+  try {
+    // Log endpoint đang gọi để kiểm tra đúng URL/port
+    if (__DEV__) {
+      console.log('LOGIN_REQUEST →', `${api.defaults.baseURL}/auth/login`, {
+        email: email.trim(),
+      });
     }
-  };
+
+    const res = await api.post('/auth/login', {
+      email: email.trim(),
+      password,
+    });
+
+    if (res.data?.success) {
+      navigation.replace('MainApp'); // vào Home
+    } else {
+      Alert.alert('Login Failed', res.data?.message || 'Invalid email or password.');
+    }
+  } catch (err: any) {
+    // ---- LOG CHI TIẾT LỖI ----
+    const status = err?.response?.status;
+    const data = err?.response?.data;
+    const cfg = err?.config;
+    if (__DEV__) {
+      console.log('LOGIN_ERROR →', {
+        message: err?.message,
+        status,
+        data,
+        url: cfg?.url,
+        baseURL: cfg?.baseURL,
+        method: cfg?.method,
+      });
+    }
+
+    // ---- PHÂN LOẠI LỖI ----
+    if (status === 401) {
+      // Sai tài khoản/mật khẩu
+      Alert.alert('Login Failed', 'Invalid email or password.');
+    } else if (typeof status === 'number') {
+      // Có HTTP status khác (400/403/500/…)
+      Alert.alert(
+        'Login Failed',
+        data?.message || `Server error (${status}). Please try again.`
+      );
+    } else {
+      // Không có status ⇒ Network/SSL/ATS/timeout…
+      Alert.alert(
+        'Login Failed',
+        'Network error. Please check server URL/port or HTTPS/ATS settings.'
+      );
+    }
+  }
+};
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

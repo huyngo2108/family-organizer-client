@@ -24,13 +24,26 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+
+	<!-- ATS: cho phép HTTP local -->
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
 	</dict>
+
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>RCTNewArchEnabled</key>
@@ -51,7 +64,7 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-  	<string>Fonts/MaterialCommunityIcons.ttf</string>
+		<string>Fonts/MaterialCommunityIcons.ttf</string>
 	</array>
 </dict>
 </plist>
