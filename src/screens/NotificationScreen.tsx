@@ -105,6 +105,7 @@ export default function NotificationScreen() {
             </View>
           );
         })}
+        <Text style={styles.noMoreText}>no older notifications</Text>
       </ScrollView>
     </View>
   );
@@ -209,4 +210,12 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '600',
   },
+  noMoreText: {
+  textAlign: 'center',
+  color: '#B0B0B0',
+  fontSize: 13,
+  marginTop: 16,
+  marginBottom: 12,
+},
+
 });
