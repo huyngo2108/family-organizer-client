@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { Platform } from 'react-native';
 
+const LAN = '192.168.1.50'; 
 const initialBase = Platform.select({
-  ios: 'https://localhost:7226',
+  ios: `http://${LAN}:5247`,
   android: 'http://10.0.2.2:5247',
   default: 'http://localhost:5247',
 })!;
@@ -15,7 +16,7 @@ const api = axios.create({
 
 export async function ensureServer(): Promise<string> {
   const candidates = Platform.select({
-    ios: ['https://localhost:7226', 'http://localhost:5247'],
+    ios: [`http://${LAN}:5247`, 'https://localhost:7226', 'http://localhost:5247'],
     android: ['http://10.0.2.2:5247'],
     default: ['http://localhost:5247', 'https://localhost:7226'],
   })!;
@@ -29,7 +30,6 @@ export async function ensureServer(): Promise<string> {
         return base;
       }
     } catch {
-      // thử base kế tiếp
     }
   }
   throw new Error('Server not reachable');
