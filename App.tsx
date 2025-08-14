@@ -2,10 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { PaperProvider } from 'react-native-paper';
 import { ActivityIndicator, View } from 'react-native';
-import MainNavigator from './src/navigation/MainNavigator';
 import theme from './src/theme/theme';
 import { AuthProvider, useAuth } from './src/context/AuthContext';
-import LoginScreen from './src/screens/LoginScreen'; 
+import MainNavigator from './src/navigation/MainNavigator';
+import AuthStack from './src/navigation/AuthStack';
 
 function Gate() {
   const { user, loading } = useAuth();
@@ -16,7 +16,7 @@ function Gate() {
       </View>
     );
   }
-  return user ? <MainNavigator /> : <LoginScreen />;
+  return user ? <MainNavigator /> : <AuthStack />;
 }
 
 export default function App() {

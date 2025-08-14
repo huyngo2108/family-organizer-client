@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api, { TOKEN_KEY, AuthResponse, User } from '../services/api';
 import axios from 'axios';
@@ -39,7 +45,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await AsyncStorage.setItem(TOKEN_KEY, res.data.token);
       setUser(res.data.user);
     } catch (err) {
-      if (axios.isAxiosError(err) && err.response?.status === 401) throw new Error('INVALID_CREDENTIALS');
+      if (axios.isAxiosError(err) && err.response?.status === 401) {
+        throw new Error('INVALID_CREDENTIALS');
+      }
       throw new Error('LOGIN_FAILED');
     }
   };

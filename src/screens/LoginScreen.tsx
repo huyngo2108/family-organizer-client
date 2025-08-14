@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Alert, TouchableOpacity, Image } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackNavigation } from '../types';
+import type { AuthStackNavigation } from '../types';
 
 import InputField from '../components/InputField';
 import PrimaryButton from '../components/PrimaryButton';
@@ -13,7 +13,7 @@ import { useAuth } from '../context/AuthContext';
 export default function LoginScreen() {
   const { colors } = useTheme();
   const styles = useLoginScreenStyles();
-  const navigation = useNavigation<RootStackNavigation>();
+  const navigation = useNavigation<AuthStackNavigation>();
   const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +25,6 @@ export default function LoginScreen() {
     }
     try {
       await login(email.trim(), password);
-      navigation.replace('MainApp');
     } catch (err: any) {
       const msg =
         err?.message === 'INVALID_CREDENTIALS'
