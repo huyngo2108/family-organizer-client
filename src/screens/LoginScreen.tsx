@@ -3,10 +3,9 @@ import { View, Text, Alert, TouchableOpacity, Image } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import type { AuthStackNavigation } from '../types';
-
 import InputField from '../components/InputField';
 import PrimaryButton from '../components/PrimaryButton';
-
+import AuthLogo from '../components/AuthLogo';
 import { useLoginScreenStyles } from '../styles/screens/LoginScreen.styles';
 import { useAuth } from '../context/AuthContext';
 
@@ -37,9 +36,11 @@ export default function LoginScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.centerContent}>
-        <Text style={styles.appTitle}>Family Organizer</Text>
+        <AuthLogo />
         <Text style={styles.subTitle}>Sign Up</Text>
-        <Text style={styles.description}>Enter your email and password to sign up for this app</Text>
+        <Text style={styles.description}>
+          Enter your email and password to sign up for this app
+        </Text>
 
         <InputField
           label="Email"
@@ -90,7 +91,10 @@ export default function LoginScreen() {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={0.9} style={[styles.socialBtn, styles.socialBtnSpacing]}>
+        <TouchableOpacity
+          activeOpacity={0.9}
+          style={[styles.socialBtn, styles.socialBtnSpacing]}
+        >
           <View style={styles.socialInner}>
             <Image
               style={styles.socialIcon}
@@ -101,7 +105,8 @@ export default function LoginScreen() {
         </TouchableOpacity>
 
         <Text style={styles.legalText}>
-          By clicking continue, you agree to our <Text style={styles.linkText}>Terms of Service</Text> and{' '}
+          By clicking continue, you agree to our{' '}
+          <Text style={styles.linkText}>Terms of Service</Text> and{' '}
           <Text style={styles.linkText}>Privacy Policy</Text>
         </Text>
       </View>

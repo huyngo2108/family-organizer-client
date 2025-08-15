@@ -9,25 +9,18 @@ interface InputFieldProps extends React.ComponentProps<typeof TextInput> {
 
 export default function InputField({ style, ...props }: InputFieldProps) {
   const { roundness, colors } = useTheme();
-
   return (
     <TextInput
       mode="outlined"
-      style={[
-        styles.input,
-        { borderRadius: roundness, backgroundColor: colors.surface },
-        style,
-      ]}
+      style={[styles.input, { borderRadius: roundness, backgroundColor: '#FFFFFF' }, style]}
       outlineColor={colors.outline}
-      activeOutlineColor={colors.primary}
-      textColor={colors.onSurface}
+      activeOutlineColor="#00000087"
+      textColor="#000000"
       {...props}
     />
   );
 }
 
 const styles = StyleSheet.create({
-  input: {
-    marginBottom: spacing.md,
-  },
+  input: { marginBottom: spacing.md },
 });

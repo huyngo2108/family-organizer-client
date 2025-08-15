@@ -17,7 +17,6 @@ type AuthContextType = {
   logout: () => Promise<void>;
   refreshMe: () => Promise<void>;
 };
-
 const AuthContext = createContext<AuthContextType>({} as any);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -28,17 +27,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     (async () => {
       try {
         const token = await AsyncStorage.getItem(TOKEN_KEY);
-        if (token) await refreshMe();
-      } catch {}
-      finally { setLoading(false); }
+        if (token) {
+          await refreshMe();
+        } else {
+          setUser(null);
+        }
+      } catch {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
   const refreshMe = async () => {
-    const res = await api.get<{ user: User }>('/auth/me');
-    setUser(res.data.user);
+    try {
+      const res = await api.get<{ user: User }>('/auth/me'); 
+      setUser(res.data.user);
+    } catch (err) {
+      if (axios.isAxiosError(err) && (err.response?.status === 401 || err.response?.status === 403)) {
+        await AsyncStorage.removeItem(TOKEN_KEY);
+        setUser(null);
+        return;
+      }
+      throw err;
+    }
   };
-
   const login = async (email: string, password: string) => {
     try {
       const res = await api.post<AuthResponse>('/auth/login', { email, password });
@@ -51,7 +65,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('LOGIN_FAILED');
     }
   };
-
   const register = async (email: string, username: string, password: string, fullName?: string) => {
     try {
       const res = await api.post<AuthResponse>('/auth/register', { email, username, password, fullName });
@@ -66,17 +79,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('REGISTER_FAILED');
     }
   };
-
   const logout = async () => {
     await AsyncStorage.removeItem(TOKEN_KEY);
-    setUser(null);
+    setUser(null); 
   };
-
   return (
     <AuthContext.Provider value={{ user, loading, login, register, logout, refreshMe }}>
       {children}
     </AuthContext.Provider>
   );
 }
-
 export const useAuth = () => useContext(AuthContext);
