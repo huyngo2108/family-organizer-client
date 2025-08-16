@@ -1,38 +1,32 @@
 import axios from 'axios';
-import { Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const LAN = '192.168.1.50'; 
-const initialBase = Platform.select({
-  ios: `http://${LAN}:5247`,
-  android: 'http://10.0.2.2:5247',
-  default: 'http://localhost:5247',
-})!;
+export const TOKEN_KEY = '@foa:token';
+const BASE = 'http://localhost:5000/api';
 
 const api = axios.create({
-  baseURL: `${initialBase}/api`,
+  baseURL: BASE,
   headers: { 'Content-Type': 'application/json' },
-  timeout: 10000,
+  timeout: 15000,
 });
 
-export async function ensureServer(): Promise<string> {
-  const candidates = Platform.select({
-    ios: [`http://${LAN}:5247`, 'https://localhost:7226', 'http://localhost:5247'],
-    android: ['http://10.0.2.2:5247'],
-    default: ['http://localhost:5247', 'https://localhost:7226'],
-  })!;
-
-  for (const base of candidates) {
-    try {
-      const tmp = axios.create({ baseURL: base, timeout: 4000 });
-      const res = await tmp.get('/api/auth/ping');
-      if (res.status === 200) {
-        api.defaults.baseURL = `${base}/api`;
-        return base;
-      }
-    } catch {
-    }
+api.interceptors.request.use(async (config) => {
+  const token = await AsyncStorage.getItem(TOKEN_KEY);
+  if (token) {
+    config.headers = config.headers ?? {};
+    config.headers.Authorization = `Bearer ${token}`;
   }
-  throw new Error('Server not reachable');
-}
+  return config;
+});
+
+export type User = {
+  id: number;
+  email: string;
+  username: string;
+  fullName?: string | null;
+  createdUtc?: string;
+};
+
+export type AuthResponse = { token: string; user: User };
 
 export default api;
