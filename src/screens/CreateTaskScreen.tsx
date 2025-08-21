@@ -1,139 +1,140 @@
-import React, { useState } from 'react';
-import {
-  View,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput as RNTextInput,
-} from 'react-native';
-import { useTheme, TextInput, Button, Divider } from 'react-native-paper';
+import React, { useMemo, useState } from 'react';
+import { View, StyleSheet, KeyboardAvoidingView, Platform, FlatList, Alert, TouchableOpacity } from 'react-native';
+import { useTheme, TextInput, Button, Appbar, Text, Divider } from 'react-native-paper';
+import { useTasks } from '../context/TaskContext';
+import { Priority } from '../types/task';
+import TaskRow from '../components/TaskRow';
+import { mapTaskToRow } from '../adapters/task-to-row';
 
-import { useCreateTaskScreenStyles } from '../styles/screens/CreateTaskScreen.styles';
+const PRIORITIES: Priority[] = ['Low', 'Medium', 'High'];
 
-interface Task {
-  name: string;
-  deadline: string;
-  priority: string;
-  description: string;
-  assignedTo: string;
+function normalizeDateInput(input: string) {
+  const digits = input.replace(/[^\d]/g, '').slice(0, 8);
+  const parts: string[] = [];
+  if (digits.length >= 2) parts.push(digits.slice(0, 2));
+  if (digits.length >= 4) parts.push(digits.slice(2, 4));
+  if (digits.length > 4) parts.push(digits.slice(4));
+  return parts.join('/');
 }
 
 export default function CreateTaskScreen() {
   const { colors } = useTheme();
-  const styles = useCreateTaskScreenStyles();
+  const { tasks, createTask } = useTasks();
 
-  const [taskName, setTaskName] = useState('');
-  const [deadline, setDeadline] = useState('');
-  const [priority, setPriority] = useState('');
+  const [title, setTitle] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [priority, setPriority] = useState<Priority>('Medium');
   const [description, setDescription] = useState('');
-  const [assignedTo, setAssignedTo] = useState('');
-  const [taskList, setTaskList] = useState<Task[]>([]);
+  const [assigneeEmail, setAssigneeEmail] = useState('');
 
-  const handleCreateTask = () => {
-    if (!taskName) return;
-    const newTask: Task = {
-      name: taskName,
-      deadline: deadline || 'No deadline',
-      priority: priority || 'Low',
-      description: description || 'No notes',
-      assignedTo: assignedTo || 'Unassigned',
-    };
-    setTaskList([newTask, ...taskList]);
-    setTaskName('');
-    setDeadline('');
-    setPriority('');
+  const onDateChange = (text: string) => setDueDate(normalizeDateInput(text));
+
+  const onCreate = () => {
+    if (!title.trim()) return;
+    if (assigneeEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(assigneeEmail.trim())) return;
+    createTask({ title, dueDate, priority, description, assigneeEmail });
+    setTitle('');
+    setDueDate('');
+    setPriority('Medium');
     setDescription('');
-    setAssignedTo('');
+    setAssigneeEmail('');
   };
+
+  const rowData = useMemo(() => tasks.map(mapTaskToRow), [tasks]);
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1, backgroundColor: colors.background }}
+      style={[styles.container, { backgroundColor: colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      <ScrollView contentContainerStyle={styles.container}>
+      <Appbar.Header mode="small">
+        <Appbar.BackAction onPress={() => {}} />
+        <Appbar.Content title="Household Task" />
+        <Appbar.Action icon="account-circle" onPress={() => {}} />
+      </Appbar.Header>
 
-        <View style={[styles.headerCustom, { backgroundColor: colors.background }]}>
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.backText}>{'<'} </Text>
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Household Task</Text>
-          <Image
-            source={require('../../assets/images/logo.png')}
-            style={styles.logo}
-          />
+      <View style={styles.form}>
+        <TextInput
+          label="Create Task"
+          placeholder="Name Task"
+          value={title}
+          onChangeText={setTitle}
+          mode="outlined"
+          style={styles.input}
+        />
+        <TextInput
+          label="Completion Deadline"
+          placeholder="DD/MM/YYYY"
+          value={dueDate}
+          onChangeText={onDateChange}
+          mode="outlined"
+          style={styles.input}
+          keyboardType="number-pad"
+          maxLength={10}
+        />
+        <View style={styles.segmentWrap}>
+          {PRIORITIES.map(p => {
+            const active = p === priority;
+            return (
+              <TouchableOpacity
+                key={p}
+                style={[styles.segmentItem, active && styles.segmentActive]}
+                onPress={() => setPriority(p)}
+                activeOpacity={0.8}
+              >
+                <Text style={[styles.segmentText, active && styles.segmentTextActive]}>{p}</Text>
+              </TouchableOpacity>
+            );
+          })}
         </View>
-
-        {/* Task Form */}
-        <View style={styles.formContainer}>
-          <View style={styles.formRow}>
-            <Text style={styles.formLabel}>Create Task</Text>
-            <TextInput
-              value={taskName}
-              onChangeText={setTaskName}
-              placeholder="Name Task"
-              mode="flat"
-              underlineColor="transparent"
-              style={styles.textInput}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.formRow}>
-            <Text style={styles.formLabel}>Completion Deadline</Text>
-            <Text style={styles.formValue}>DD/MM/YYYY</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.formRow}>
-            <Text style={styles.formLabel}>Priority</Text>
-            <Text style={styles.formValue}>Select</Text>
-          </TouchableOpacity>
-
-          <View style={styles.formRow}>
-            <Text style={styles.formLabel}>Description</Text>
-            <TextInput
-              value={description}
-              onChangeText={setDescription}
-              placeholder="Add Reminders"
-              mode="flat"
-              underlineColor="transparent"
-              style={styles.textInput}
-              multiline
-            />
-          </View>
-
-          <TouchableOpacity style={styles.formRow}>
-            <Text style={styles.formLabel}>Assigned To Members</Text>
-            <Text style={styles.formValue}>member selection</Text>
-          </TouchableOpacity>
-        </View>
-
-        <Button
-          mode="contained"
-          onPress={handleCreateTask}
-          style={styles.saveButton}
-          labelStyle={styles.saveButtonLabel}
-        >
+        <TextInput
+          label="Description"
+          placeholder="Add Reminders"
+          value={description}
+          onChangeText={setDescription}
+          mode="outlined"
+          style={styles.input}
+          multiline
+        />
+        <TextInput
+          label="Assigned To Members"
+          placeholder="member@example.com"
+          value={assigneeEmail}
+          onChangeText={setAssigneeEmail}
+          mode="outlined"
+          style={styles.input}
+          autoCapitalize="none"
+          keyboardType="email-address"
+        />
+        <Button mode="contained-tonal" onPress={onCreate} style={styles.createBtn} contentStyle={{ height: 48 }}>
           Create Task
         </Button>
+      </View>
 
-        {taskList.length > 0 && (
-          <View style={styles.recentTasksContainer}>
-            <Text style={styles.sectionTitle}>Recently Created:</Text>
-            {taskList.map((task, index) => (
-              <View key={index} style={styles.taskItem}>
-                <Text style={styles.taskName}>{task.name}</Text>
-                <Text style={styles.taskDetail}>~ {task.deadline}</Text>
-                <Text style={styles.taskDetail}>notes: {task.description}</Text>
-                <Divider style={{ marginVertical: 8 }} />
-              </View>
-            ))}
-          </View>
-        )}
-
-      </ScrollView>
+      <Divider />
+      <View style={styles.listWrap}>
+        <Text variant="titleMedium" style={styles.sectionTitle}>Recently Created</Text>
+        <FlatList
+          data={rowData}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => <TaskRow {...item} />}
+          contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 24 }}
+        />
+      </View>
     </KeyboardAvoidingView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+  form: { padding: 16, gap: 12 },
+  input: { borderRadius: 12 },
+  createBtn: { marginTop: 8, borderRadius: 12 },
+  listWrap: { flex: 1, paddingTop: 8 },
+  sectionTitle: { marginLeft: 16, marginBottom: 8, fontWeight: '600' },
+  segmentWrap: { flexDirection: 'row', gap: 8, justifyContent: 'space-between' },
+  segmentItem: { flex: 1, borderRadius: 10, borderWidth: 1, borderColor: '#E0E0E0', paddingVertical: 10, alignItems: 'center' },
+  segmentActive: { backgroundColor: '#F6F2EA', borderColor: '#D6C9B3' },
+  segmentText: { fontWeight: '600' },
+  segmentTextActive: { fontWeight: '700' },
+});

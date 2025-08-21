@@ -6,6 +6,7 @@ import theme from './src/theme/theme';
 import { AuthProvider, useAuth } from './src/context/AuthContext';
 import MainNavigator from './src/navigation/MainNavigator';
 import AuthStack from './src/navigation/AuthStack';
+import { TaskProvider } from './src/context/TaskContext'; 
 
 function Gate() {
   const { user, loading } = useAuth();
@@ -23,9 +24,11 @@ export default function App() {
   return (
     <PaperProvider theme={theme}>
       <AuthProvider>
-        <NavigationContainer>
-          <Gate />
-        </NavigationContainer>
+        <TaskProvider>  
+          <NavigationContainer>
+            <Gate />
+          </NavigationContainer>
+        </TaskProvider>
       </AuthProvider>
     </PaperProvider>
   );
