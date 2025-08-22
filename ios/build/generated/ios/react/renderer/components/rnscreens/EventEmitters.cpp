@@ -70,6 +70,77 @@ void RNSBottomTabsScreenEventEmitter::onDidDisappear(OnDidDisappear event) const
 
 
 
+void RNSSplitViewHostEventEmitter::onCollapse(OnCollapse event) const {
+  dispatchEvent("collapse", [](jsi::Runtime &runtime) {
+    auto payload = jsi::Object(runtime);
+    
+    return payload;
+  });
+}
+
+
+void RNSSplitViewHostEventEmitter::onDisplayModeWillChange(OnDisplayModeWillChange event) const {
+  dispatchEvent("displayModeWillChange", [event=std::move(event)](jsi::Runtime &runtime) {
+    auto payload = jsi::Object(runtime);
+    payload.setProperty(runtime, "currentDisplayMode", event.currentDisplayMode);
+payload.setProperty(runtime, "nextDisplayMode", event.nextDisplayMode);
+    return payload;
+  });
+}
+
+
+void RNSSplitViewHostEventEmitter::onExpand(OnExpand event) const {
+  dispatchEvent("expand", [](jsi::Runtime &runtime) {
+    auto payload = jsi::Object(runtime);
+    
+    return payload;
+  });
+}
+
+
+void RNSSplitViewHostEventEmitter::onInspectorHide(OnInspectorHide event) const {
+  dispatchEvent("inspectorHide", [](jsi::Runtime &runtime) {
+    auto payload = jsi::Object(runtime);
+    
+    return payload;
+  });
+}
+
+
+void RNSSplitViewScreenEventEmitter::onWillAppear(OnWillAppear event) const {
+  dispatchEvent("willAppear", [](jsi::Runtime &runtime) {
+    auto payload = jsi::Object(runtime);
+    
+    return payload;
+  });
+}
+
+
+void RNSSplitViewScreenEventEmitter::onDidAppear(OnDidAppear event) const {
+  dispatchEvent("didAppear", [](jsi::Runtime &runtime) {
+    auto payload = jsi::Object(runtime);
+    
+    return payload;
+  });
+}
+
+
+void RNSSplitViewScreenEventEmitter::onWillDisappear(OnWillDisappear event) const {
+  dispatchEvent("willDisappear", [](jsi::Runtime &runtime) {
+    auto payload = jsi::Object(runtime);
+    
+    return payload;
+  });
+}
+
+
+void RNSSplitViewScreenEventEmitter::onDidDisappear(OnDidDisappear event) const {
+  dispatchEvent("didDisappear", [](jsi::Runtime &runtime) {
+    auto payload = jsi::Object(runtime);
+    
+    return payload;
+  });
+}
 
 
 void RNSStackScreenEventEmitter::onWillAppear(OnWillAppear event) const {
