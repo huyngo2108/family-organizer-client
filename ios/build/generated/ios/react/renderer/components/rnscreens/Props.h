@@ -18,80 +18,45 @@
 
 namespace facebook::react {
 
-enum class RNSBottomTabsTabBarBlurEffect { None, ExtraLight, Light, Dark, Regular, Prominent, SystemUltraThinMaterial, SystemThinMaterial, SystemMaterial, SystemThickMaterial, SystemChromeMaterial, SystemUltraThinMaterialLight, SystemThinMaterialLight, SystemMaterialLight, SystemThickMaterialLight, SystemChromeMaterialLight, SystemUltraThinMaterialDark, SystemThinMaterialDark, SystemMaterialDark, SystemThickMaterialDark, SystemChromeMaterialDark };
+enum class RNSBottomTabsTabBarItemLabelVisibilityMode { Auto, Selected, Labeled, Unlabeled };
 
-static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSBottomTabsTabBarBlurEffect &result) {
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSBottomTabsTabBarItemLabelVisibilityMode &result) {
   auto string = (std::string)value;
-  if (string == "none") { result = RNSBottomTabsTabBarBlurEffect::None; return; }
-  if (string == "extraLight") { result = RNSBottomTabsTabBarBlurEffect::ExtraLight; return; }
-  if (string == "light") { result = RNSBottomTabsTabBarBlurEffect::Light; return; }
-  if (string == "dark") { result = RNSBottomTabsTabBarBlurEffect::Dark; return; }
-  if (string == "regular") { result = RNSBottomTabsTabBarBlurEffect::Regular; return; }
-  if (string == "prominent") { result = RNSBottomTabsTabBarBlurEffect::Prominent; return; }
-  if (string == "systemUltraThinMaterial") { result = RNSBottomTabsTabBarBlurEffect::SystemUltraThinMaterial; return; }
-  if (string == "systemThinMaterial") { result = RNSBottomTabsTabBarBlurEffect::SystemThinMaterial; return; }
-  if (string == "systemMaterial") { result = RNSBottomTabsTabBarBlurEffect::SystemMaterial; return; }
-  if (string == "systemThickMaterial") { result = RNSBottomTabsTabBarBlurEffect::SystemThickMaterial; return; }
-  if (string == "systemChromeMaterial") { result = RNSBottomTabsTabBarBlurEffect::SystemChromeMaterial; return; }
-  if (string == "systemUltraThinMaterialLight") { result = RNSBottomTabsTabBarBlurEffect::SystemUltraThinMaterialLight; return; }
-  if (string == "systemThinMaterialLight") { result = RNSBottomTabsTabBarBlurEffect::SystemThinMaterialLight; return; }
-  if (string == "systemMaterialLight") { result = RNSBottomTabsTabBarBlurEffect::SystemMaterialLight; return; }
-  if (string == "systemThickMaterialLight") { result = RNSBottomTabsTabBarBlurEffect::SystemThickMaterialLight; return; }
-  if (string == "systemChromeMaterialLight") { result = RNSBottomTabsTabBarBlurEffect::SystemChromeMaterialLight; return; }
-  if (string == "systemUltraThinMaterialDark") { result = RNSBottomTabsTabBarBlurEffect::SystemUltraThinMaterialDark; return; }
-  if (string == "systemThinMaterialDark") { result = RNSBottomTabsTabBarBlurEffect::SystemThinMaterialDark; return; }
-  if (string == "systemMaterialDark") { result = RNSBottomTabsTabBarBlurEffect::SystemMaterialDark; return; }
-  if (string == "systemThickMaterialDark") { result = RNSBottomTabsTabBarBlurEffect::SystemThickMaterialDark; return; }
-  if (string == "systemChromeMaterialDark") { result = RNSBottomTabsTabBarBlurEffect::SystemChromeMaterialDark; return; }
+  if (string == "auto") { result = RNSBottomTabsTabBarItemLabelVisibilityMode::Auto; return; }
+  if (string == "selected") { result = RNSBottomTabsTabBarItemLabelVisibilityMode::Selected; return; }
+  if (string == "labeled") { result = RNSBottomTabsTabBarItemLabelVisibilityMode::Labeled; return; }
+  if (string == "unlabeled") { result = RNSBottomTabsTabBarItemLabelVisibilityMode::Unlabeled; return; }
   abort();
 }
 
-static inline std::string toString(const RNSBottomTabsTabBarBlurEffect &value) {
+static inline std::string toString(const RNSBottomTabsTabBarItemLabelVisibilityMode &value) {
   switch (value) {
-    case RNSBottomTabsTabBarBlurEffect::None: return "none";
-    case RNSBottomTabsTabBarBlurEffect::ExtraLight: return "extraLight";
-    case RNSBottomTabsTabBarBlurEffect::Light: return "light";
-    case RNSBottomTabsTabBarBlurEffect::Dark: return "dark";
-    case RNSBottomTabsTabBarBlurEffect::Regular: return "regular";
-    case RNSBottomTabsTabBarBlurEffect::Prominent: return "prominent";
-    case RNSBottomTabsTabBarBlurEffect::SystemUltraThinMaterial: return "systemUltraThinMaterial";
-    case RNSBottomTabsTabBarBlurEffect::SystemThinMaterial: return "systemThinMaterial";
-    case RNSBottomTabsTabBarBlurEffect::SystemMaterial: return "systemMaterial";
-    case RNSBottomTabsTabBarBlurEffect::SystemThickMaterial: return "systemThickMaterial";
-    case RNSBottomTabsTabBarBlurEffect::SystemChromeMaterial: return "systemChromeMaterial";
-    case RNSBottomTabsTabBarBlurEffect::SystemUltraThinMaterialLight: return "systemUltraThinMaterialLight";
-    case RNSBottomTabsTabBarBlurEffect::SystemThinMaterialLight: return "systemThinMaterialLight";
-    case RNSBottomTabsTabBarBlurEffect::SystemMaterialLight: return "systemMaterialLight";
-    case RNSBottomTabsTabBarBlurEffect::SystemThickMaterialLight: return "systemThickMaterialLight";
-    case RNSBottomTabsTabBarBlurEffect::SystemChromeMaterialLight: return "systemChromeMaterialLight";
-    case RNSBottomTabsTabBarBlurEffect::SystemUltraThinMaterialDark: return "systemUltraThinMaterialDark";
-    case RNSBottomTabsTabBarBlurEffect::SystemThinMaterialDark: return "systemThinMaterialDark";
-    case RNSBottomTabsTabBarBlurEffect::SystemMaterialDark: return "systemMaterialDark";
-    case RNSBottomTabsTabBarBlurEffect::SystemThickMaterialDark: return "systemThickMaterialDark";
-    case RNSBottomTabsTabBarBlurEffect::SystemChromeMaterialDark: return "systemChromeMaterialDark";
+    case RNSBottomTabsTabBarItemLabelVisibilityMode::Auto: return "auto";
+    case RNSBottomTabsTabBarItemLabelVisibilityMode::Selected: return "selected";
+    case RNSBottomTabsTabBarItemLabelVisibilityMode::Labeled: return "labeled";
+    case RNSBottomTabsTabBarItemLabelVisibilityMode::Unlabeled: return "unlabeled";
   }
 }
-struct RNSBottomTabsTabBarItemTitlePositionAdjustmentStruct {
-  Float horizontal{0.0};
-  Float vertical{0.0};
-};
+enum class RNSBottomTabsTabBarMinimizeBehavior { Automatic, Never, OnScrollDown, OnScrollUp };
 
-static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSBottomTabsTabBarItemTitlePositionAdjustmentStruct &result) {
-  auto map = (std::unordered_map<std::string, RawValue>)value;
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSBottomTabsTabBarMinimizeBehavior &result) {
+  auto string = (std::string)value;
+  if (string == "automatic") { result = RNSBottomTabsTabBarMinimizeBehavior::Automatic; return; }
+  if (string == "never") { result = RNSBottomTabsTabBarMinimizeBehavior::Never; return; }
+  if (string == "onScrollDown") { result = RNSBottomTabsTabBarMinimizeBehavior::OnScrollDown; return; }
+  if (string == "onScrollUp") { result = RNSBottomTabsTabBarMinimizeBehavior::OnScrollUp; return; }
+  abort();
+}
 
-  auto tmp_horizontal = map.find("horizontal");
-  if (tmp_horizontal != map.end()) {
-    fromRawValue(context, tmp_horizontal->second, result.horizontal);
-  }
-  auto tmp_vertical = map.find("vertical");
-  if (tmp_vertical != map.end()) {
-    fromRawValue(context, tmp_vertical->second, result.vertical);
+static inline std::string toString(const RNSBottomTabsTabBarMinimizeBehavior &value) {
+  switch (value) {
+    case RNSBottomTabsTabBarMinimizeBehavior::Automatic: return "automatic";
+    case RNSBottomTabsTabBarMinimizeBehavior::Never: return "never";
+    case RNSBottomTabsTabBarMinimizeBehavior::OnScrollDown: return "onScrollDown";
+    case RNSBottomTabsTabBarMinimizeBehavior::OnScrollUp: return "onScrollUp";
   }
 }
 
-static inline std::string toString(const RNSBottomTabsTabBarItemTitlePositionAdjustmentStruct &value) {
-  return "[Object RNSBottomTabsTabBarItemTitlePositionAdjustmentStruct]";
-}
 class RNSBottomTabsProps final : public ViewProps {
  public:
   RNSBottomTabsProps() = default;
@@ -100,73 +65,51 @@ class RNSBottomTabsProps final : public ViewProps {
 #pragma mark - Props
 
   SharedColor tabBarBackgroundColor{};
-  RNSBottomTabsTabBarBlurEffect tabBarBlurEffect{RNSBottomTabsTabBarBlurEffect::None};
-  SharedColor tabBarTintColor{};
   std::string tabBarItemTitleFontFamily{};
   Float tabBarItemTitleFontSize{0.0};
+  Float tabBarItemTitleFontSizeActive{0.0};
   std::string tabBarItemTitleFontWeight{};
   std::string tabBarItemTitleFontStyle{};
   SharedColor tabBarItemTitleFontColor{};
-  RNSBottomTabsTabBarItemTitlePositionAdjustmentStruct tabBarItemTitlePositionAdjustment{};
-  SharedColor tabBarItemIconColor{};
-  SharedColor tabBarItemBadgeBackgroundColor{};
   SharedColor tabBarItemTitleFontColorActive{};
+  SharedColor tabBarItemIconColor{};
   SharedColor tabBarItemIconColorActive{};
-  Float tabBarItemTitleFontSizeActive{0.0};
+  SharedColor tabBarItemActiveIndicatorColor{};
+  bool tabBarItemActiveIndicatorEnabled{true};
+  SharedColor tabBarItemRippleColor{};
+  RNSBottomTabsTabBarItemLabelVisibilityMode tabBarItemLabelVisibilityMode{RNSBottomTabsTabBarItemLabelVisibilityMode::Auto};
+  SharedColor tabBarTintColor{};
+  RNSBottomTabsTabBarMinimizeBehavior tabBarMinimizeBehavior{RNSBottomTabsTabBarMinimizeBehavior::Automatic};
   bool controlNavigationStateInJS{false};
 };
 
-enum class RNSBottomTabsScreenTabBarBlurEffect { None, ExtraLight, Light, Dark, Regular, Prominent, SystemUltraThinMaterial, SystemThinMaterial, SystemMaterial, SystemThickMaterial, SystemChromeMaterial, SystemUltraThinMaterialLight, SystemThinMaterialLight, SystemMaterialLight, SystemThickMaterialLight, SystemChromeMaterialLight, SystemUltraThinMaterialDark, SystemThinMaterialDark, SystemMaterialDark, SystemThickMaterialDark, SystemChromeMaterialDark };
+enum class RNSBottomTabsScreenOrientation { Inherit, All, AllButUpsideDown, Portrait, PortraitUp, PortraitDown, Landscape, LandscapeLeft, LandscapeRight };
 
-static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSBottomTabsScreenTabBarBlurEffect &result) {
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSBottomTabsScreenOrientation &result) {
   auto string = (std::string)value;
-  if (string == "none") { result = RNSBottomTabsScreenTabBarBlurEffect::None; return; }
-  if (string == "extraLight") { result = RNSBottomTabsScreenTabBarBlurEffect::ExtraLight; return; }
-  if (string == "light") { result = RNSBottomTabsScreenTabBarBlurEffect::Light; return; }
-  if (string == "dark") { result = RNSBottomTabsScreenTabBarBlurEffect::Dark; return; }
-  if (string == "regular") { result = RNSBottomTabsScreenTabBarBlurEffect::Regular; return; }
-  if (string == "prominent") { result = RNSBottomTabsScreenTabBarBlurEffect::Prominent; return; }
-  if (string == "systemUltraThinMaterial") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemUltraThinMaterial; return; }
-  if (string == "systemThinMaterial") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemThinMaterial; return; }
-  if (string == "systemMaterial") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemMaterial; return; }
-  if (string == "systemThickMaterial") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemThickMaterial; return; }
-  if (string == "systemChromeMaterial") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemChromeMaterial; return; }
-  if (string == "systemUltraThinMaterialLight") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemUltraThinMaterialLight; return; }
-  if (string == "systemThinMaterialLight") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemThinMaterialLight; return; }
-  if (string == "systemMaterialLight") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemMaterialLight; return; }
-  if (string == "systemThickMaterialLight") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemThickMaterialLight; return; }
-  if (string == "systemChromeMaterialLight") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemChromeMaterialLight; return; }
-  if (string == "systemUltraThinMaterialDark") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemUltraThinMaterialDark; return; }
-  if (string == "systemThinMaterialDark") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemThinMaterialDark; return; }
-  if (string == "systemMaterialDark") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemMaterialDark; return; }
-  if (string == "systemThickMaterialDark") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemThickMaterialDark; return; }
-  if (string == "systemChromeMaterialDark") { result = RNSBottomTabsScreenTabBarBlurEffect::SystemChromeMaterialDark; return; }
+  if (string == "inherit") { result = RNSBottomTabsScreenOrientation::Inherit; return; }
+  if (string == "all") { result = RNSBottomTabsScreenOrientation::All; return; }
+  if (string == "allButUpsideDown") { result = RNSBottomTabsScreenOrientation::AllButUpsideDown; return; }
+  if (string == "portrait") { result = RNSBottomTabsScreenOrientation::Portrait; return; }
+  if (string == "portraitUp") { result = RNSBottomTabsScreenOrientation::PortraitUp; return; }
+  if (string == "portraitDown") { result = RNSBottomTabsScreenOrientation::PortraitDown; return; }
+  if (string == "landscape") { result = RNSBottomTabsScreenOrientation::Landscape; return; }
+  if (string == "landscapeLeft") { result = RNSBottomTabsScreenOrientation::LandscapeLeft; return; }
+  if (string == "landscapeRight") { result = RNSBottomTabsScreenOrientation::LandscapeRight; return; }
   abort();
 }
 
-static inline std::string toString(const RNSBottomTabsScreenTabBarBlurEffect &value) {
+static inline std::string toString(const RNSBottomTabsScreenOrientation &value) {
   switch (value) {
-    case RNSBottomTabsScreenTabBarBlurEffect::None: return "none";
-    case RNSBottomTabsScreenTabBarBlurEffect::ExtraLight: return "extraLight";
-    case RNSBottomTabsScreenTabBarBlurEffect::Light: return "light";
-    case RNSBottomTabsScreenTabBarBlurEffect::Dark: return "dark";
-    case RNSBottomTabsScreenTabBarBlurEffect::Regular: return "regular";
-    case RNSBottomTabsScreenTabBarBlurEffect::Prominent: return "prominent";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemUltraThinMaterial: return "systemUltraThinMaterial";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemThinMaterial: return "systemThinMaterial";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemMaterial: return "systemMaterial";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemThickMaterial: return "systemThickMaterial";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemChromeMaterial: return "systemChromeMaterial";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemUltraThinMaterialLight: return "systemUltraThinMaterialLight";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemThinMaterialLight: return "systemThinMaterialLight";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemMaterialLight: return "systemMaterialLight";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemThickMaterialLight: return "systemThickMaterialLight";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemChromeMaterialLight: return "systemChromeMaterialLight";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemUltraThinMaterialDark: return "systemUltraThinMaterialDark";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemThinMaterialDark: return "systemThinMaterialDark";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemMaterialDark: return "systemMaterialDark";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemThickMaterialDark: return "systemThickMaterialDark";
-    case RNSBottomTabsScreenTabBarBlurEffect::SystemChromeMaterialDark: return "systemChromeMaterialDark";
+    case RNSBottomTabsScreenOrientation::Inherit: return "inherit";
+    case RNSBottomTabsScreenOrientation::All: return "all";
+    case RNSBottomTabsScreenOrientation::AllButUpsideDown: return "allButUpsideDown";
+    case RNSBottomTabsScreenOrientation::Portrait: return "portrait";
+    case RNSBottomTabsScreenOrientation::PortraitUp: return "portraitUp";
+    case RNSBottomTabsScreenOrientation::PortraitDown: return "portraitDown";
+    case RNSBottomTabsScreenOrientation::Landscape: return "landscape";
+    case RNSBottomTabsScreenOrientation::LandscapeLeft: return "landscapeLeft";
+    case RNSBottomTabsScreenOrientation::LandscapeRight: return "landscapeRight";
   }
 }
 enum class RNSBottomTabsScreenIconType { Image, Template, SfSymbol };
@@ -186,28 +129,43 @@ static inline std::string toString(const RNSBottomTabsScreenIconType &value) {
     case RNSBottomTabsScreenIconType::SfSymbol: return "sfSymbol";
   }
 }
-struct RNSBottomTabsScreenTabBarItemTitlePositionAdjustmentStruct {
-  Float horizontal{0.0};
-  Float vertical{0.0};
-};
+enum class RNSBottomTabsScreenSystemItem { None, Bookmarks, Contacts, Downloads, Favorites, Featured, History, More, MostRecent, MostViewed, Recents, Search, TopRated };
 
-static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSBottomTabsScreenTabBarItemTitlePositionAdjustmentStruct &result) {
-  auto map = (std::unordered_map<std::string, RawValue>)value;
-
-  auto tmp_horizontal = map.find("horizontal");
-  if (tmp_horizontal != map.end()) {
-    fromRawValue(context, tmp_horizontal->second, result.horizontal);
-  }
-  auto tmp_vertical = map.find("vertical");
-  if (tmp_vertical != map.end()) {
-    fromRawValue(context, tmp_vertical->second, result.vertical);
-  }
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSBottomTabsScreenSystemItem &result) {
+  auto string = (std::string)value;
+  if (string == "none") { result = RNSBottomTabsScreenSystemItem::None; return; }
+  if (string == "bookmarks") { result = RNSBottomTabsScreenSystemItem::Bookmarks; return; }
+  if (string == "contacts") { result = RNSBottomTabsScreenSystemItem::Contacts; return; }
+  if (string == "downloads") { result = RNSBottomTabsScreenSystemItem::Downloads; return; }
+  if (string == "favorites") { result = RNSBottomTabsScreenSystemItem::Favorites; return; }
+  if (string == "featured") { result = RNSBottomTabsScreenSystemItem::Featured; return; }
+  if (string == "history") { result = RNSBottomTabsScreenSystemItem::History; return; }
+  if (string == "more") { result = RNSBottomTabsScreenSystemItem::More; return; }
+  if (string == "mostRecent") { result = RNSBottomTabsScreenSystemItem::MostRecent; return; }
+  if (string == "mostViewed") { result = RNSBottomTabsScreenSystemItem::MostViewed; return; }
+  if (string == "recents") { result = RNSBottomTabsScreenSystemItem::Recents; return; }
+  if (string == "search") { result = RNSBottomTabsScreenSystemItem::Search; return; }
+  if (string == "topRated") { result = RNSBottomTabsScreenSystemItem::TopRated; return; }
+  abort();
 }
 
-static inline std::string toString(const RNSBottomTabsScreenTabBarItemTitlePositionAdjustmentStruct &value) {
-  return "[Object RNSBottomTabsScreenTabBarItemTitlePositionAdjustmentStruct]";
+static inline std::string toString(const RNSBottomTabsScreenSystemItem &value) {
+  switch (value) {
+    case RNSBottomTabsScreenSystemItem::None: return "none";
+    case RNSBottomTabsScreenSystemItem::Bookmarks: return "bookmarks";
+    case RNSBottomTabsScreenSystemItem::Contacts: return "contacts";
+    case RNSBottomTabsScreenSystemItem::Downloads: return "downloads";
+    case RNSBottomTabsScreenSystemItem::Favorites: return "favorites";
+    case RNSBottomTabsScreenSystemItem::Featured: return "featured";
+    case RNSBottomTabsScreenSystemItem::History: return "history";
+    case RNSBottomTabsScreenSystemItem::More: return "more";
+    case RNSBottomTabsScreenSystemItem::MostRecent: return "mostRecent";
+    case RNSBottomTabsScreenSystemItem::MostViewed: return "mostViewed";
+    case RNSBottomTabsScreenSystemItem::Recents: return "recents";
+    case RNSBottomTabsScreenSystemItem::Search: return "search";
+    case RNSBottomTabsScreenSystemItem::TopRated: return "topRated";
+  }
 }
-
 struct RNSBottomTabsScreenSpecialEffectsRepeatedTabSelectionStruct {
   bool popToRoot{true};
   bool scrollToTop{true};
@@ -255,24 +213,21 @@ class RNSBottomTabsScreenProps final : public ViewProps {
 
   bool isFocused{false};
   std::string tabKey{};
-  SharedColor tabBarBackgroundColor{};
-  RNSBottomTabsScreenTabBarBlurEffect tabBarBlurEffect{RNSBottomTabsScreenTabBarBlurEffect::None};
-  std::string tabBarItemTitleFontFamily{};
-  Float tabBarItemTitleFontSize{0.0};
-  std::string tabBarItemTitleFontWeight{};
-  std::string tabBarItemTitleFontStyle{};
-  SharedColor tabBarItemTitleFontColor{};
-  RNSBottomTabsScreenTabBarItemTitlePositionAdjustmentStruct tabBarItemTitlePositionAdjustment{};
-  SharedColor tabBarItemIconColor{};
-  SharedColor tabBarItemBadgeBackgroundColor{};
   std::string title{};
+  std::string badgeValue{};
+  RNSBottomTabsScreenOrientation orientation{RNSBottomTabsScreenOrientation::Inherit};
   std::string iconResourceName{};
+  ImageSource iconResource{};
+  SharedColor tabBarItemBadgeTextColor{};
+  SharedColor tabBarItemBadgeBackgroundColor{};
+  folly::dynamic standardAppearance{};
+  folly::dynamic scrollEdgeAppearance{};
   RNSBottomTabsScreenIconType iconType{RNSBottomTabsScreenIconType::SfSymbol};
   ImageSource iconImageSource{};
   std::string iconSfSymbolName{};
   ImageSource selectedIconImageSource{};
   std::string selectedIconSfSymbolName{};
-  std::string badgeValue{};
+  RNSBottomTabsScreenSystemItem systemItem{RNSBottomTabsScreenSystemItem::None};
   RNSBottomTabsScreenSpecialEffectsStruct specialEffects{};
   bool overrideScrollViewContentInsetAdjustmentBehavior{true};
 };
@@ -297,48 +252,48 @@ class RNSScreenStackHostProps final : public ViewProps {
   
 };
 
-enum class RNSSplitViewHostDisplayMode { Automatic, SecondaryOnly, OneBesideSecondary, OneOverSecondary, TwoBesideSecondary, TwoOverSecondary, TwoDisplaceSecondary };
+enum class RNSSplitViewHostPreferredDisplayMode { Automatic, SecondaryOnly, OneBesideSecondary, OneOverSecondary, TwoBesideSecondary, TwoOverSecondary, TwoDisplaceSecondary };
 
-static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSSplitViewHostDisplayMode &result) {
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSSplitViewHostPreferredDisplayMode &result) {
   auto string = (std::string)value;
-  if (string == "automatic") { result = RNSSplitViewHostDisplayMode::Automatic; return; }
-  if (string == "secondaryOnly") { result = RNSSplitViewHostDisplayMode::SecondaryOnly; return; }
-  if (string == "oneBesideSecondary") { result = RNSSplitViewHostDisplayMode::OneBesideSecondary; return; }
-  if (string == "oneOverSecondary") { result = RNSSplitViewHostDisplayMode::OneOverSecondary; return; }
-  if (string == "twoBesideSecondary") { result = RNSSplitViewHostDisplayMode::TwoBesideSecondary; return; }
-  if (string == "twoOverSecondary") { result = RNSSplitViewHostDisplayMode::TwoOverSecondary; return; }
-  if (string == "twoDisplaceSecondary") { result = RNSSplitViewHostDisplayMode::TwoDisplaceSecondary; return; }
+  if (string == "automatic") { result = RNSSplitViewHostPreferredDisplayMode::Automatic; return; }
+  if (string == "secondaryOnly") { result = RNSSplitViewHostPreferredDisplayMode::SecondaryOnly; return; }
+  if (string == "oneBesideSecondary") { result = RNSSplitViewHostPreferredDisplayMode::OneBesideSecondary; return; }
+  if (string == "oneOverSecondary") { result = RNSSplitViewHostPreferredDisplayMode::OneOverSecondary; return; }
+  if (string == "twoBesideSecondary") { result = RNSSplitViewHostPreferredDisplayMode::TwoBesideSecondary; return; }
+  if (string == "twoOverSecondary") { result = RNSSplitViewHostPreferredDisplayMode::TwoOverSecondary; return; }
+  if (string == "twoDisplaceSecondary") { result = RNSSplitViewHostPreferredDisplayMode::TwoDisplaceSecondary; return; }
   abort();
 }
 
-static inline std::string toString(const RNSSplitViewHostDisplayMode &value) {
+static inline std::string toString(const RNSSplitViewHostPreferredDisplayMode &value) {
   switch (value) {
-    case RNSSplitViewHostDisplayMode::Automatic: return "automatic";
-    case RNSSplitViewHostDisplayMode::SecondaryOnly: return "secondaryOnly";
-    case RNSSplitViewHostDisplayMode::OneBesideSecondary: return "oneBesideSecondary";
-    case RNSSplitViewHostDisplayMode::OneOverSecondary: return "oneOverSecondary";
-    case RNSSplitViewHostDisplayMode::TwoBesideSecondary: return "twoBesideSecondary";
-    case RNSSplitViewHostDisplayMode::TwoOverSecondary: return "twoOverSecondary";
-    case RNSSplitViewHostDisplayMode::TwoDisplaceSecondary: return "twoDisplaceSecondary";
+    case RNSSplitViewHostPreferredDisplayMode::Automatic: return "automatic";
+    case RNSSplitViewHostPreferredDisplayMode::SecondaryOnly: return "secondaryOnly";
+    case RNSSplitViewHostPreferredDisplayMode::OneBesideSecondary: return "oneBesideSecondary";
+    case RNSSplitViewHostPreferredDisplayMode::OneOverSecondary: return "oneOverSecondary";
+    case RNSSplitViewHostPreferredDisplayMode::TwoBesideSecondary: return "twoBesideSecondary";
+    case RNSSplitViewHostPreferredDisplayMode::TwoOverSecondary: return "twoOverSecondary";
+    case RNSSplitViewHostPreferredDisplayMode::TwoDisplaceSecondary: return "twoDisplaceSecondary";
   }
 }
-enum class RNSSplitViewHostSplitBehavior { Automatic, Displace, Overlay, Tile };
+enum class RNSSplitViewHostPreferredSplitBehavior { Automatic, Displace, Overlay, Tile };
 
-static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSSplitViewHostSplitBehavior &result) {
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSSplitViewHostPreferredSplitBehavior &result) {
   auto string = (std::string)value;
-  if (string == "automatic") { result = RNSSplitViewHostSplitBehavior::Automatic; return; }
-  if (string == "displace") { result = RNSSplitViewHostSplitBehavior::Displace; return; }
-  if (string == "overlay") { result = RNSSplitViewHostSplitBehavior::Overlay; return; }
-  if (string == "tile") { result = RNSSplitViewHostSplitBehavior::Tile; return; }
+  if (string == "automatic") { result = RNSSplitViewHostPreferredSplitBehavior::Automatic; return; }
+  if (string == "displace") { result = RNSSplitViewHostPreferredSplitBehavior::Displace; return; }
+  if (string == "overlay") { result = RNSSplitViewHostPreferredSplitBehavior::Overlay; return; }
+  if (string == "tile") { result = RNSSplitViewHostPreferredSplitBehavior::Tile; return; }
   abort();
 }
 
-static inline std::string toString(const RNSSplitViewHostSplitBehavior &value) {
+static inline std::string toString(const RNSSplitViewHostPreferredSplitBehavior &value) {
   switch (value) {
-    case RNSSplitViewHostSplitBehavior::Automatic: return "automatic";
-    case RNSSplitViewHostSplitBehavior::Displace: return "displace";
-    case RNSSplitViewHostSplitBehavior::Overlay: return "overlay";
-    case RNSSplitViewHostSplitBehavior::Tile: return "tile";
+    case RNSSplitViewHostPreferredSplitBehavior::Automatic: return "automatic";
+    case RNSSplitViewHostPreferredSplitBehavior::Displace: return "displace";
+    case RNSSplitViewHostPreferredSplitBehavior::Overlay: return "overlay";
+    case RNSSplitViewHostPreferredSplitBehavior::Tile: return "tile";
   }
 }
 enum class RNSSplitViewHostPrimaryEdge { Leading, Trailing };
@@ -356,7 +311,118 @@ static inline std::string toString(const RNSSplitViewHostPrimaryEdge &value) {
     case RNSSplitViewHostPrimaryEdge::Trailing: return "trailing";
   }
 }
+enum class RNSSplitViewHostDisplayModeButtonVisibility { Always, Automatic, Never };
 
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSSplitViewHostDisplayModeButtonVisibility &result) {
+  auto string = (std::string)value;
+  if (string == "always") { result = RNSSplitViewHostDisplayModeButtonVisibility::Always; return; }
+  if (string == "automatic") { result = RNSSplitViewHostDisplayModeButtonVisibility::Automatic; return; }
+  if (string == "never") { result = RNSSplitViewHostDisplayModeButtonVisibility::Never; return; }
+  abort();
+}
+
+static inline std::string toString(const RNSSplitViewHostDisplayModeButtonVisibility &value) {
+  switch (value) {
+    case RNSSplitViewHostDisplayModeButtonVisibility::Always: return "always";
+    case RNSSplitViewHostDisplayModeButtonVisibility::Automatic: return "automatic";
+    case RNSSplitViewHostDisplayModeButtonVisibility::Never: return "never";
+  }
+}
+enum class RNSSplitViewHostOrientation { Inherit, All, AllButUpsideDown, Portrait, PortraitUp, PortraitDown, Landscape, LandscapeLeft, LandscapeRight };
+
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSSplitViewHostOrientation &result) {
+  auto string = (std::string)value;
+  if (string == "inherit") { result = RNSSplitViewHostOrientation::Inherit; return; }
+  if (string == "all") { result = RNSSplitViewHostOrientation::All; return; }
+  if (string == "allButUpsideDown") { result = RNSSplitViewHostOrientation::AllButUpsideDown; return; }
+  if (string == "portrait") { result = RNSSplitViewHostOrientation::Portrait; return; }
+  if (string == "portraitUp") { result = RNSSplitViewHostOrientation::PortraitUp; return; }
+  if (string == "portraitDown") { result = RNSSplitViewHostOrientation::PortraitDown; return; }
+  if (string == "landscape") { result = RNSSplitViewHostOrientation::Landscape; return; }
+  if (string == "landscapeLeft") { result = RNSSplitViewHostOrientation::LandscapeLeft; return; }
+  if (string == "landscapeRight") { result = RNSSplitViewHostOrientation::LandscapeRight; return; }
+  abort();
+}
+
+static inline std::string toString(const RNSSplitViewHostOrientation &value) {
+  switch (value) {
+    case RNSSplitViewHostOrientation::Inherit: return "inherit";
+    case RNSSplitViewHostOrientation::All: return "all";
+    case RNSSplitViewHostOrientation::AllButUpsideDown: return "allButUpsideDown";
+    case RNSSplitViewHostOrientation::Portrait: return "portrait";
+    case RNSSplitViewHostOrientation::PortraitUp: return "portraitUp";
+    case RNSSplitViewHostOrientation::PortraitDown: return "portraitDown";
+    case RNSSplitViewHostOrientation::Landscape: return "landscape";
+    case RNSSplitViewHostOrientation::LandscapeLeft: return "landscapeLeft";
+    case RNSSplitViewHostOrientation::LandscapeRight: return "landscapeRight";
+  }
+}
+struct RNSSplitViewHostColumnMetricsStruct {
+  Float minimumPrimaryColumnWidth{-1.0};
+  Float maximumPrimaryColumnWidth{-1.0};
+  Float preferredPrimaryColumnWidthOrFraction{-1.0};
+  Float minimumSupplementaryColumnWidth{-1.0};
+  Float maximumSupplementaryColumnWidth{-1.0};
+  Float preferredSupplementaryColumnWidthOrFraction{-1.0};
+  Float minimumSecondaryColumnWidth{-1.0};
+  Float preferredSecondaryColumnWidthOrFraction{-1.0};
+  Float minimumInspectorColumnWidth{-1.0};
+  Float maximumInspectorColumnWidth{-1.0};
+  Float preferredInspectorColumnWidthOrFraction{-1.0};
+};
+
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSSplitViewHostColumnMetricsStruct &result) {
+  auto map = (std::unordered_map<std::string, RawValue>)value;
+
+  auto tmp_minimumPrimaryColumnWidth = map.find("minimumPrimaryColumnWidth");
+  if (tmp_minimumPrimaryColumnWidth != map.end()) {
+    fromRawValue(context, tmp_minimumPrimaryColumnWidth->second, result.minimumPrimaryColumnWidth);
+  }
+  auto tmp_maximumPrimaryColumnWidth = map.find("maximumPrimaryColumnWidth");
+  if (tmp_maximumPrimaryColumnWidth != map.end()) {
+    fromRawValue(context, tmp_maximumPrimaryColumnWidth->second, result.maximumPrimaryColumnWidth);
+  }
+  auto tmp_preferredPrimaryColumnWidthOrFraction = map.find("preferredPrimaryColumnWidthOrFraction");
+  if (tmp_preferredPrimaryColumnWidthOrFraction != map.end()) {
+    fromRawValue(context, tmp_preferredPrimaryColumnWidthOrFraction->second, result.preferredPrimaryColumnWidthOrFraction);
+  }
+  auto tmp_minimumSupplementaryColumnWidth = map.find("minimumSupplementaryColumnWidth");
+  if (tmp_minimumSupplementaryColumnWidth != map.end()) {
+    fromRawValue(context, tmp_minimumSupplementaryColumnWidth->second, result.minimumSupplementaryColumnWidth);
+  }
+  auto tmp_maximumSupplementaryColumnWidth = map.find("maximumSupplementaryColumnWidth");
+  if (tmp_maximumSupplementaryColumnWidth != map.end()) {
+    fromRawValue(context, tmp_maximumSupplementaryColumnWidth->second, result.maximumSupplementaryColumnWidth);
+  }
+  auto tmp_preferredSupplementaryColumnWidthOrFraction = map.find("preferredSupplementaryColumnWidthOrFraction");
+  if (tmp_preferredSupplementaryColumnWidthOrFraction != map.end()) {
+    fromRawValue(context, tmp_preferredSupplementaryColumnWidthOrFraction->second, result.preferredSupplementaryColumnWidthOrFraction);
+  }
+  auto tmp_minimumSecondaryColumnWidth = map.find("minimumSecondaryColumnWidth");
+  if (tmp_minimumSecondaryColumnWidth != map.end()) {
+    fromRawValue(context, tmp_minimumSecondaryColumnWidth->second, result.minimumSecondaryColumnWidth);
+  }
+  auto tmp_preferredSecondaryColumnWidthOrFraction = map.find("preferredSecondaryColumnWidthOrFraction");
+  if (tmp_preferredSecondaryColumnWidthOrFraction != map.end()) {
+    fromRawValue(context, tmp_preferredSecondaryColumnWidthOrFraction->second, result.preferredSecondaryColumnWidthOrFraction);
+  }
+  auto tmp_minimumInspectorColumnWidth = map.find("minimumInspectorColumnWidth");
+  if (tmp_minimumInspectorColumnWidth != map.end()) {
+    fromRawValue(context, tmp_minimumInspectorColumnWidth->second, result.minimumInspectorColumnWidth);
+  }
+  auto tmp_maximumInspectorColumnWidth = map.find("maximumInspectorColumnWidth");
+  if (tmp_maximumInspectorColumnWidth != map.end()) {
+    fromRawValue(context, tmp_maximumInspectorColumnWidth->second, result.maximumInspectorColumnWidth);
+  }
+  auto tmp_preferredInspectorColumnWidthOrFraction = map.find("preferredInspectorColumnWidthOrFraction");
+  if (tmp_preferredInspectorColumnWidthOrFraction != map.end()) {
+    fromRawValue(context, tmp_preferredInspectorColumnWidthOrFraction->second, result.preferredInspectorColumnWidthOrFraction);
+  }
+}
+
+static inline std::string toString(const RNSSplitViewHostColumnMetricsStruct &value) {
+  return "[Object RNSSplitViewHostColumnMetricsStruct]";
+}
 class RNSSplitViewHostProps final : public ViewProps {
  public:
   RNSSplitViewHostProps() = default;
@@ -364,12 +430,32 @@ class RNSSplitViewHostProps final : public ViewProps {
 
 #pragma mark - Props
 
-  RNSSplitViewHostDisplayMode displayMode{RNSSplitViewHostDisplayMode::Automatic};
-  RNSSplitViewHostSplitBehavior splitBehavior{RNSSplitViewHostSplitBehavior::Automatic};
+  RNSSplitViewHostPreferredDisplayMode preferredDisplayMode{RNSSplitViewHostPreferredDisplayMode::Automatic};
+  RNSSplitViewHostPreferredSplitBehavior preferredSplitBehavior{RNSSplitViewHostPreferredSplitBehavior::Automatic};
   RNSSplitViewHostPrimaryEdge primaryEdge{RNSSplitViewHostPrimaryEdge::Leading};
   bool showSecondaryToggleButton{false};
+  RNSSplitViewHostDisplayModeButtonVisibility displayModeButtonVisibility{RNSSplitViewHostDisplayModeButtonVisibility::Automatic};
+  RNSSplitViewHostColumnMetricsStruct columnMetrics{};
+  RNSSplitViewHostOrientation orientation{RNSSplitViewHostOrientation::Inherit};
   bool presentsWithGesture{true};
+  bool showInspector{false};
 };
+
+enum class RNSSplitViewScreenColumnType { Column, Inspector };
+
+static inline void fromRawValue(const PropsParserContext& context, const RawValue &value, RNSSplitViewScreenColumnType &result) {
+  auto string = (std::string)value;
+  if (string == "column") { result = RNSSplitViewScreenColumnType::Column; return; }
+  if (string == "inspector") { result = RNSSplitViewScreenColumnType::Inspector; return; }
+  abort();
+}
+
+static inline std::string toString(const RNSSplitViewScreenColumnType &value) {
+  switch (value) {
+    case RNSSplitViewScreenColumnType::Column: return "column";
+    case RNSSplitViewScreenColumnType::Inspector: return "inspector";
+  }
+}
 
 class RNSSplitViewScreenProps final : public ViewProps {
  public:
@@ -378,7 +464,7 @@ class RNSSplitViewScreenProps final : public ViewProps {
 
 #pragma mark - Props
 
-  
+  RNSSplitViewScreenColumnType columnType{RNSSplitViewScreenColumnType::Column};
 };
 
 class RNSStackScreenProps final : public ViewProps {
